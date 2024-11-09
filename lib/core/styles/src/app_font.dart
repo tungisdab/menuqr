@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 
 const String fontFamily = 'ReadexPro';
 
-const double paragraphSpacing = 10.0;
 
 class ParagraphSpacingBox extends StatelessWidget {
-  const ParagraphSpacingBox({super.key});
+  final double h;
+  final double w;
+  const ParagraphSpacingBox({super.key, required this.h, required this.w});
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(height: paragraphSpacing, width: paragraphSpacing,);
+    return SizedBox(height: h, width: w,);
   }
 }

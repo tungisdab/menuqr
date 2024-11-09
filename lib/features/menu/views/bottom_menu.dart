@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:menuqr/features/home/home.dart';
+import 'package:menuqr/features/home/presentation/home_screen.dart';
 import 'package:menuqr/features/menu/menu.dart';
-import 'package:menuqr/features/order/order.dart';
-import 'package:menuqr/features/payment/payment.dart';
-import 'package:menuqr/features/report/report.dart';
-import 'package:menuqr/features/setting_app/setting_app.dart';
+import 'package:menuqr/features/order/presentation/order_screen.dart';
+import 'package:menuqr/features/payment/presentation/payment_screen.dart';
+import 'package:menuqr/features/report/presentation/report_screen.dart';
+import 'package:menuqr/features/setting_app/presentation/setting_screen.dart';
+
+import '../../../core/styles/styles.dart';
 
 class BottomMenu extends StatefulWidget {
   const BottomMenu({super.key});
@@ -66,172 +68,213 @@ class _BottomMenuState extends State<BottomMenu> {
   Widget _menu(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
         ),
         boxShadow: [
           BoxShadow(
-            color: const Color.fromARGB(255, 186, 175, 175).withOpacity(0.2),
+            color: Colors.grey.withOpacity(0.4),
             spreadRadius: 5,
             blurRadius: 10,
-            offset: const Offset(0, 1),
+            offset: const Offset(1, 1),
           ),
         ],
       ),
-      child: NavigationBar(
-        indicatorColor: Colors.transparent,
-        animationDuration: const Duration(milliseconds: 1000),
-        labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-        selectedIndex: context.watch<BottomNavCubit>().state,
-        backgroundColor: Colors.transparent,
-        surfaceTintColor: Colors.transparent,
-        destinations: [
-          NavigationDestination(
-            icon: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SvgPicture.asset(
-                  'assets/icons/home.svg',
-                  colorFilter: ColorFilter.mode(
-                    context.watch<BottomNavCubit>().state == 0
-                        ? Colors.blue
-                        : Colors.grey,
-                    BlendMode.srcIn,
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+        child: NavigationBar(
+          elevation: 70,
+          indicatorColor: Colors.transparent,
+          animationDuration: const Duration(milliseconds: 1000),
+          labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+          selectedIndex: context.watch<BottomNavCubit>().state,
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
+          destinations: [
+            NavigationDestination(
+              icon: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const ParagraphSpacingBox(
+                    h: 10,
+                    w: 10,
                   ),
-                ),
-                if (context.watch<BottomNavCubit>().state == 0)
-                  const SizedBox(height: 4),
-                if (context.watch<BottomNavCubit>().state == 0)
+                  SvgPicture.asset(
+                    'assets/icons/home.svg',
+                    colorFilter: ColorFilter.mode(
+                      context.watch<BottomNavCubit>().state == 0
+                          ? Colors.blue
+                          : Colors.grey,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  const ParagraphSpacingBox(
+                    h: 4,
+                    w: 4,
+                  ),
                   Container(
                     width: 6,
                     height: 6,
-                    decoration: const BoxDecoration(
-                      color: Colors.blue,
+                    decoration: BoxDecoration(
+                      color: context.watch<BottomNavCubit>().state == 0
+                          ? Colors.blue
+                          : Colors.white,
                       shape: BoxShape.circle,
                     ),
                   ),
-              ],
+                ],
+              ),
+              label: 'Home',
             ),
-            label: 'Home',
-          ),
-          NavigationDestination(
-            icon: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SvgPicture.asset(
-                  'assets/icons/bag3.svg',
-                  colorFilter: ColorFilter.mode(
-                    context.watch<BottomNavCubit>().state == 1
-                        ? Colors.blue
-                        : Colors.grey,
-                    BlendMode.srcIn,
+            NavigationDestination(
+              icon: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const ParagraphSpacingBox(
+                    h: 10,
+                    w: 10,
                   ),
-                ),
-                if (context.watch<BottomNavCubit>().state == 1)
-                  const SizedBox(height: 4),
-                if (context.watch<BottomNavCubit>().state == 1)
+                  SvgPicture.asset(
+                    'assets/icons/bag3.svg',
+                    colorFilter: ColorFilter.mode(
+                      context.watch<BottomNavCubit>().state == 1
+                          ? Colors.blue
+                          : Colors.grey,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  const ParagraphSpacingBox(
+                    h: 4,
+                    w: 4,
+                  ),
                   Container(
                     width: 6,
                     height: 6,
-                    decoration: const BoxDecoration(
-                      color: Colors.blue,
+                    decoration: BoxDecoration(
+                      color: context.watch<BottomNavCubit>().state == 1
+                          ? Colors.blue
+                          : Colors.white,
                       shape: BoxShape.circle,
                     ),
                   ),
-              ],
+                ],
+              ),
+              label: 'Order',
             ),
-            label: 'Order',
-          ),
-          NavigationDestination(
-            icon: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SvgPicture.asset(
-                  'assets/icons/chart2.svg',
-                  colorFilter: ColorFilter.mode(
-                    context.watch<BottomNavCubit>().state == 2
-                        ? Colors.blue
-                        : Colors.grey,
-                    BlendMode.srcIn,
+            NavigationDestination(
+              icon: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const ParagraphSpacingBox(
+                    h: 10,
+                    w: 10,
                   ),
-                ),
-                if (context.watch<BottomNavCubit>().state == 2)
-                  const SizedBox(height: 4),
-                if (context.watch<BottomNavCubit>().state == 2)
+                  SvgPicture.asset(
+                    'assets/icons/chart2.svg',
+                    colorFilter: ColorFilter.mode(
+                      context.watch<BottomNavCubit>().state == 2
+                          ? Colors.blue
+                          : Colors.grey,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  const ParagraphSpacingBox(
+                    h: 4,
+                    w: 4,
+                  ),
                   Container(
                     width: 6,
                     height: 6,
-                    decoration: const BoxDecoration(
-                      color: Colors.blue,
+                    decoration: BoxDecoration(
+                      color: context.watch<BottomNavCubit>().state == 2
+                          ? Colors.blue
+                          : Colors.white,
                       shape: BoxShape.circle,
                     ),
                   ),
-              ],
+                ],
+              ),
+              label: 'Report',
             ),
-            label: 'Report',
-          ),
-          NavigationDestination(
-            icon: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SvgPicture.asset(
-                  'assets/icons/group.svg',
-                  colorFilter: ColorFilter.mode(
-                    context.watch<BottomNavCubit>().state == 3
-                        ? Colors.blue
-                        : Colors.grey,
-                    BlendMode.srcIn,
+            NavigationDestination(
+              icon: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const ParagraphSpacingBox(
+                    h: 10,
+                    w: 10,
                   ),
-                ),
-                if (context.watch<BottomNavCubit>().state == 3)
-                  const SizedBox(height: 4),
-                if (context.watch<BottomNavCubit>().state == 3)
+                  SvgPicture.asset(
+                    'assets/icons/group.svg',
+                    colorFilter: ColorFilter.mode(
+                      context.watch<BottomNavCubit>().state == 3
+                          ? Colors.blue
+                          : Colors.grey,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  const ParagraphSpacingBox(
+                    h: 4,
+                    w: 4,
+                  ),
                   Container(
                     width: 6,
                     height: 6,
-                    decoration: const BoxDecoration(
-                      color: Colors.blue,
+                    decoration: BoxDecoration(
+                      color: context.watch<BottomNavCubit>().state == 3
+                          ? Colors.blue
+                          : Colors.white,
                       shape: BoxShape.circle,
                     ),
                   ),
-              ],
+                ],
+              ),
+              label: 'Payment',
             ),
-            label: 'Payment',
-          ),
-          NavigationDestination(
-            icon: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SvgPicture.asset(
-                  'assets/icons/setting.svg',
-                  colorFilter: ColorFilter.mode(
-                    context.watch<BottomNavCubit>().state == 4
-                        ? Colors.blue
-                        : Colors.grey,
-                    BlendMode.srcIn,
+            NavigationDestination(
+              icon: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const ParagraphSpacingBox(
+                    h: 10,
+                    w: 10,
                   ),
-                ),
-                if (context.watch<BottomNavCubit>().state == 4)
-                  const SizedBox(height: 4),
-                if (context.watch<BottomNavCubit>().state == 4)
+                  SvgPicture.asset(
+                    'assets/icons/setting.svg',
+                    colorFilter: ColorFilter.mode(
+                      context.watch<BottomNavCubit>().state == 4
+                          ? Colors.blue
+                          : Colors.grey,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  const ParagraphSpacingBox(
+                    h: 4,
+                    w: 4,
+                  ),
                   Container(
                     width: 6,
                     height: 6,
-                    decoration: const BoxDecoration(
-                      color: Colors.blue,
+                    decoration: BoxDecoration(
+                      color: context.watch<BottomNavCubit>().state == 4
+                          ? Colors.blue
+                          : Colors.white,
                       shape: BoxShape.circle,
                     ),
                   ),
-              ],
+                ],
+              ),
+              label: 'Setting',
             ),
-            label: 'Setting',
-          ),
-        ],
-        onDestinationSelected: (index) {
-          jumpToPage(index);
-        },
+          ],
+          onDestinationSelected: (index) {
+            jumpToPage(index);
+          },
+        ),
       ),
     );
   }

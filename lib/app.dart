@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'features/login/login.dart';
+import 'core/styles/styles.dart';
+import 'features/auth/presentation/login/login.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -12,7 +14,7 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
    @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       // appBar: AppBar(
       //   actions: [
       //     BlocBuilder<ThemeBloc, bool>(
@@ -26,7 +28,7 @@ class _AppState extends State<App> {
       //     )
       //   ],
       // ),
-      body: SafeArea(
+      body: const SafeArea(
         child: LoginScreen(),
       ),
     );

@@ -27,6 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const ParagraphSpacingBox(h: 97, w: 20,),
               Center(child: SvgPicture.asset('assets/images/menuqr.svg')),
               const SizedBox(height: 60),
               Text(
@@ -37,10 +38,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const ParagraphSpacingBox(),
+              const ParagraphSpacingBox(h: 10, w: 20,),
               TextFormField(
                 decoration: InputDecoration(
-                  hintText: 'Số điện thoại',
+                  hintText: 'Nhập số điện thoại',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide:
@@ -48,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              const ParagraphSpacingBox(),
+              const ParagraphSpacingBox(h: 20, w: 20,),
               Text(
                 'Mật khẩu',
                 style: TextStyle(
@@ -56,18 +57,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   fontSize: Theme.of(context).textTheme.bodySmall?.fontSize,
                 ),
               ),
-              const ParagraphSpacingBox(),
+              const ParagraphSpacingBox(h: 10, w: 20,),
               TextFormField(
                 decoration: InputDecoration(
-                  hintText: 'Số điện thoại',
+                  hintText: 'Nhập mật khẩu',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide:
                         const BorderSide(color: Colors.grey, width: 1.0),
                   ),
+                  suffixIcon: IconButton(
+                    icon: SvgPicture.asset('assets/icons/eye.svg'),
+                    onPressed: () {},
+                  )
                 ),
+                
               ),
-              const ParagraphSpacingBox(),
+              const ParagraphSpacingBox(h: 10, w: 20,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -85,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               : 'assets/icons/check_0.svg',
                         ),
                       ),
-                      const ParagraphSpacingBox(),
+                      const ParagraphSpacingBox(h: 20, w: 20,),
                       Text(
                         'Lưu mật khẩu',
                         style: TextStyle(
@@ -150,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 40),
                   Center(
-                    child: SvgPicture.asset('assets/icons/user.svg'),
+                    child: SvgPicture.asset('assets/icons/user.svg', width: 50, height: 50,),
                   ),
                   const SizedBox(height: 40),
                   Center(
@@ -158,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       text: TextSpan(
                         children: [
                           TextSpan(
-                            text: 'Bạn chưa có tài khoản? ',
+                            text: 'Chưa có tài khoản? ',
                             style: TextStyle(
                               color:
                                   Theme.of(context).textTheme.bodySmall?.color,
@@ -180,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   .textTheme
                                   .bodySmall
                                   ?.fontSize,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w400,
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
